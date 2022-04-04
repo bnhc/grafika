@@ -71,7 +71,7 @@ public class PlayMovieActivity extends Activity implements OnItemSelectedListene
         Spinner spinner = (Spinner) findViewById(R.id.playMovieFile_spinner);
         // Need to create one of these fancy ArrayAdapter thingies, and specify the generic layout
         // for the widget itself.
-        mMovieFiles = MiscUtils.getFiles(getFilesDir(), "*.mp4");
+        mMovieFiles = MiscUtils.getFiles(getExternalCacheDir(), "*.mp4");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, mMovieFiles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -172,7 +172,7 @@ public class PlayMovieActivity extends Activity implements OnItemSelectedListene
             MoviePlayer player = null;
             try {
                  player = new MoviePlayer(
-                        new File(getFilesDir(), mMovieFiles[mSelectedMovie]), surface, callback);
+                        new File(getExternalCacheDir(), mMovieFiles[mSelectedMovie]), surface, callback);
             } catch (IOException ioe) {
                 Log.e(TAG, "Unable to play movie", ioe);
                 surface.release();
